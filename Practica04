@@ -8,17 +8,17 @@ int main()
     scanf("%d", &edad);
     printf("- Ingresa tu calificacion (0 - 100): ");
     scanf("%d", &cal);
-    if (edad <= 0) // eval˙o que la edad no sea negativa o igual a cero
+    if (edad <= 0) // eval√∫o que la edad no sea negativa o igual a cero
     {
         printf("! Ingresa una edad correcta\n");
         exit(1);
     }
-    if (cal > 100) // eval˙o que la calificaciÛn sea menor a 100
+    if (cal > 100) // eval√∫o que la calificaci√≥n sea menor a 100
     {
         printf("! Ingresa una calificacion menor a 100");
         exit(1);
     }
-    if (cal < 0) // eval˙o que la calificaciÛn no sea negativa
+    if (cal < 0) // eval√∫o que la calificaci√≥n no sea negativa
     {
         printf("! Ingresa una calificacion mayor o igual 0");
         exit(1);
