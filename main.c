@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int edad, cal;
+    printf("- Ingresa tu edad: ");
+    scanf("%d", &edad);
+    printf("- Ingresa tu calificacion (0 - 100): ");
+    scanf("%d", &cal);
+    if (edad <= 0) // evalúo que la edad no sea negativa o igual a cero
+    {
+        printf("! Ingresa una edad correcta\n");
+        exit(1);
+    }
+    if (cal > 100) // evalúo que la calificación sea menor a 100
+    {
+        printf("! Ingresa una calificacion menor a 100");
+        exit(1);
+    }
+    if (cal < 0) // evalúo que la calificación no sea negativa
+    {
+        printf("! Ingresa una calificacion mayor o igual 0");
+        exit(1);
+    }
+
+    if (edad >= 18)
+    {
+        if (cal >= 60)
+        {
+            printf("Aprobado mayor de edad\n");
+        }
+        else
+        {
+            printf("Reprobado mayor de edad\n");
+        }
+    }
+    else
+    {
+        if (cal >= 60)
+        {
+            printf("Aprobado menor de edad\n");
+        }
+        else
+        {
+            printf("Reprobado menor de edad\n");
+        }
+    }
+    return 0;
+}
