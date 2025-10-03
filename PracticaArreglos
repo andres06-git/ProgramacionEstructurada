@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int i;
+    int OP, P;
+    int nuev;
+    float suma;
+    int a[6] = {1,2,0,0,3,2}; // Goles de las Chivas
+
+    do
+    {
+    printf("------ Menu de las Chivas ------\n");
+    printf("1. Marcador de cada juego\n");
+    printf("2. Resultado de un partido especifico\n");
+    printf("3. Modificar todos los resultados\n");
+    printf("4. Modificar un resultado especifico\n");
+    printf("5. Promedio\n");
+    printf("0. Salir\n");
+    printf("-> Opcion: ");
+    scanf("%d", &OP);
+    printf("\n");
+    switch(OP)
+    {
+        case 1:
+            for(i=0;i<=5;i++)
+            {
+            printf("El marcador del juego %d es %d\n", i+1, a[i]);
+            }
+            break;
+        case 2:
+             printf("De que numero de partido quieres ver el resultado? -> ");
+             scanf("%d", &i);
+             i=i-1;
+             printf("Goles: %d\n", a[i]);
+            break;
+        case 3:
+            for(i=0;i<=5;i++)
+            {
+            printf("Resultado nuevo para el partido %d -> ", i+1);
+            scanf("%d", &nuev);
+            a[i]=nuev;
+            }
+            printf("\n");
+            for(i=0;i<=5;i++)
+            {
+            printf("El marcador del juego %d es %d\n", i+1, a[i]);
+            }
+            break;
+        case 4:
+            printf("Elige el numero de partido que quieres cambiar el resultado -> ");
+            scanf("%d", &i);
+            printf("Resultado nuevo: ");
+            scanf("%d", &nuev);
+            i=i-1;
+            a[i]=nuev;
+            printf("Resultado del partido %d es: %d gol/es\n", i+1, a[i]);
+            break;
+        case 5:
+            for(i=0;i<=5;i++)
+            {
+            suma+=a[i];
+            }
+            printf("El promedio de goles es: %.2f\n", suma/6);
+            break;
+    }
+    printf("\n");
+    } while (OP!=0);
+
+    return 0;
+}
