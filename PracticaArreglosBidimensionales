@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int a = 0;
+    int b[3];
+    int c = 0;
+    printf("Direccion de memoria de a: %d\n", &a);
+    printf("Direccion de memoria de b[0]: %d\n", &b[0]);
+    printf("Direccion de memoria de b[1]: %d\n", &b[1]);
+    printf("Direccion de memoria de b[2]: %d\n", &b[2]);
+    printf("Direccion de memoria de c: %d\n", &c);
+
+    // int G[3][3] = {00, 01, 02, 10, 11, 12, 20, 21, 22}; // forma 1 de representar el arreglo bidimensional
+    int G[3][3] = {{00,01,02},    // forma 2 de representar el arreglo bidimensional
+                  {10, 11, 12},
+                  {20, 21, 22}};
+
+    printf("\nEl elemento G[2][1] es: %d\n\n", G[2][1]); // demostración de que primero se introducen las filas y después las columnas
+
+    int i, j;
+    for (i=0; i<3; i++)
+    {
+        for (j=0; j<3; j++)
+        {
+            printf("%d\t", G[i][j]);
+        }
+        printf("\n"); // se agrega un salto de línea para que visualmente tenga forma de matriz
+    }
+    return 0;
+}
