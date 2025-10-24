@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int M[6][6] = {0};
+    int i, j;
+    int fila, columna;
+    int minas = 9;
+    int seguir = 1;
+    int descubiertas = 0;
+
+    M[3][1]=9;
+    M[2][4]=9;
+    M[5][3]=9;
+    M[5][5]=9;
+    M[0][4]=9;
+    M[1][2]=9;
+    M[4][3]=9;
+    M[1][1]=9;
+    M[0][2]=9;
+
+    printf("---: BUSCAMINAS 6x6 :---\n\n");
+    printf("selecciona una fila y una columna entre 0 y 5.\n\n");
+
+    while (seguir) {
+
+        printf("Introduce fila y columna: ");
+        scanf("%d,%d", &fila, &columna);
+
+
+        if (fila < 0 || fila > 5 || columna < 0 || columna > 5) {
+            printf("Coordenadas fuera de rango. Intenta de nuevo.\n\n");
+            continue;
+        }
+
+
+        if (M[fila][columna] == 9) {
+            printf("\ncaiste en una mina, \nFin del juego.\n\n");
+            seguir = 0;
+        } else if (M[fila][columna] == -1) {
+            printf("Ya habias descubierto esta celda.\n\n");
+        } else {
+            printf("Celda segura.\n\n");
+            M[fila][columna] = -1;
+            descubiertas++;
+        }
+
+        if (descubiertas == (36 - minas)) {
+            printf("GANADOR!!!!, descubrio todas las celdas seguras\n");
+            seguir = 0;
+        }
+    }
+
+    printf("¿Quieres jugar de nuevo? (1=Si, 0=No): ");
+    scanf("%d", &seguir);
+
+    if (seguir) {
+        system("cls");
+        main();
+    }
+
+    return 0;
+}
