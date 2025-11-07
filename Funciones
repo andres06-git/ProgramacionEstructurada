@@ -1,17 +1,24 @@
-float AreaRectangulo(float base, float altura) {
+#include <stdio.h>
+#include <stdlib.h>
+
+float AreaRectangulo(float base, float altura)
+{
     return base * altura;
 }
 
-float AreaCuadrado(float lado) {
+float AreaCuadrado(float lado)
+{
     return lado * lado;
 }
 
-float AreaTriangulo(float base, float altura) {
+float AreaTriangulo(float base, float altura)
+{
     return (base * altura) / 2;
 }
 
-int main() {
-    int opcion;
+int main()
+{
+    int opcion; //
     float base, altura, lado, area;
 
     printf("=== CALCULO DE AREAS ===\n");
@@ -19,41 +26,44 @@ int main() {
     printf("2. Area de un cuadrado\n");
     printf("3. Area de un triangulo\n");
     printf("4. Salir\n");
-    printf("Seleccione una opcion: ");
+    printf("- Selecciona una opcion: ");
     scanf("%d", &opcion);
 
-    switch (opcion) {
+    switch (opcion)
+    {
         case 1:
-            printf("\n--- Area de un Rectangulo ---\n");
-            printf("Ingrese base y altura: ");
-            scanf("%f %f", &base, &altura);
+            printf("\nArea de un rectangulo\n");
+            printf("Ingresa base: ");
+            scanf("%f", &base);
+            printf("Ingresa altura: ");
+            scanf("%f", &altura);
             area = AreaRectangulo(base, altura);
-            printf("El area del rectangulo es: %.2f\n", area);
+            printf("La area es: %.2f\n", area);
             break;
 
         case 2:
-            printf("\n--- Area de un Cuadrado ---\n");
-            printf("Ingrese el lado: ");
+            printf("\nArea de un cuadrado\n");
+            printf("Ingresa lado: ");
             scanf("%f", &lado);
             area = AreaCuadrado(lado);
-            printf("El area del cuadrado es: %.2f\n", area);
+            printf("La area es: %.2f\n", area);
             break;
 
         case 3:
-            printf("\n--- Area de un Triangulo ---\n");
-            printf("Ingrese base y altura: ");
-            scanf("%f %f", &base, &altura);
+            printf("\nArea de un triangulo\n");
+            printf("Ingresa base: ");
+            scanf("%f", &base);
+            printf("Ingresa altura: ");
+            scanf("%f", &altura);
             area = AreaTriangulo(base, altura);
-            printf("El area del triangulo es: %.2f\n", area);
+            printf("La area es: %.2f\n", area);
             break;
 
         case 4:
-            printf("Saliendo del programa...\n");
+            printf("\nHas salido del programa.\n");
             break;
 
         default:
-            printf("\nOpcion no valida. Intente de nuevo.\n");
+            printf("\nOpcion incorrecta. Elige otra opcion.\n");
     }
-
-    return 0;
 }
