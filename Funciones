@@ -38,7 +38,7 @@ int main()
             printf("Ingresa altura: ");
             scanf("%f", &altura);
             area = AreaRectangulo(base, altura);
-            printf("La area es: %.2f\n", area);
+            printf("El area es: %.2f\n", area);
             break;
 
         case 2:
@@ -46,7 +46,7 @@ int main()
             printf("Ingresa lado: ");
             scanf("%f", &lado);
             area = AreaCuadrado(lado);
-            printf("La area es: %.2f\n", area);
+            printf("El area es: %.2f\n", area);
             break;
 
         case 3:
@@ -56,7 +56,7 @@ int main()
             printf("Ingresa altura: ");
             scanf("%f", &altura);
             area = AreaTriangulo(base, altura);
-            printf("La area es: %.2f\n", area);
+            printf("El area es: %.2f\n", area);
             break;
 
         case 4:
