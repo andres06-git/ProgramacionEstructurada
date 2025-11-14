@@ -1,0 +1,158 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define MAX_JUGADORES 5
+#define MAX_EQUIPOS 4
+
+struct Jugador {
+    char nombre[40];
+    int numero;
+    int goles;
+};
+
+struct Equipo {
+    char nombre[40];
+    struct Jugador Jugadores[MAX_JUGADORES];
+    int numJugadores;
+    int golesAFavor;
+    int golesEnContra;
+    int puntos;
+};
+
+void registrarEquipos(struct Equipo liga[], int *numEquipos)
+{
+    int n = *numEquipos;
+    getchar(); // limpiar el salto de línea
+    if (n<2||n>MAX_EQUIPOS)
+    {
+        printf("! Numero de equipos invalido.\n");
+        return;
+    }
+    for(int i = 0; i < n; i++)
+    {
+        printf("Equipo %d - Nombre: ", i+1);
+        fgets(liga[i].nombre, 40, stdin);
+        liga[i].nombre[strcspn(liga[i].nombre, "\n")] = 0; // lo utilizo para quitar el \n que deja fgets()
+        // Inicializar estadísticas para evitar valores basura
+        liga[i].numJugadores = MAX_JUGADORES;
+        liga[i].golesAFavor = 0;
+        liga[i].golesEnContra = 0;
+        liga[i].puntos = 0;
+
+        for(int j = 0; j < MAX_JUGADORES; j++)
+        {
+            printf("Jugador %d nombre: ", j+1);
+            fgets(liga[i].Jugadores[j].nombre, 40, stdin);
+            liga[i].Jugadores[j].nombre[strcspn(liga[i].Jugadores[j].nombre, "\n")] = 0;
+
+            printf("Jugador %d numero: ", j+1);
+            scanf("%d", &liga[i].Jugadores[j].numero);
+            getchar();
+        }
+    }
+}
+
+void mostrarEquipos(struct Equipo liga[], int numEquipos)
+{
+    for (int i = 0; i < numEquipos; i++)
+    {
+        printf("Equipo %d: %s\n", i+1, liga[i].nombre);
+        for (int j = 0; j < MAX_JUGADORES; j++)
+        {
+            printf("Jugador %d: %s (Numero: %d)\n", j+1, liga[i].Jugadores[j].nombre, liga[i].Jugadores[j].numero);
+        }
+        printf("\n");
+    }
+}
+
+void registrarPartido(struct Equipo liga[], int numEquipos)
+{
+    int local, visitante;
+    int golesLocal, golesVisitante;
+    char mensaje[80];
+
+    printf("Selecciona equipo local (0 - %s, 1 - %s): ", liga[0].nombre, liga[1].nombre);
+    scanf("%d", &local);
+
+    printf("Selecciona equipo visitante (0 - %s, 1 - %s): ", liga[0].nombre, liga[1].nombre);
+    scanf("%d", &visitante);
+
+    strcpy(mensaje, "Goles ");
+    strcat(mensaje, liga[local].nombre);
+    strcat(mensaje, ": ");
+    printf("%s", mensaje);
+    scanf("%d", &golesLocal);
+
+    strcpy(mensaje, "Goles ");
+    strcat(mensaje, liga[visitante].nombre);
+    strcat(mensaje, ": ");
+    printf("%s", mensaje);
+    scanf("%d", &golesVisitante);
+
+    // Actualización de estadísticas
+    liga[local].golesAFavor += golesLocal;
+    liga[local].golesEnContra += golesVisitante;
+
+    liga[visitante].golesAFavor += golesVisitante;
+    liga[visitante].golesEnContra += golesLocal;
+
+    if (golesLocal > golesVisitante)
+        liga[local].puntos += 3;
+    else if (golesVisitante > golesLocal)
+        liga[visitante].puntos += 3;
+    else {
+        liga[local].puntos += 1;
+        liga[visitante].puntos += 1;
+    }
+}
+
+
+void tablaPosiciones(struct Equipo liga[], int numEquipos)
+{
+    for (int i=0; i < numEquipos; i++)
+    {
+        printf("%s - Puntos: %d ||| GF: %d  GC: %d\n", liga[i].nombre, liga[i].puntos, liga[i].golesAFavor, liga[i].golesEnContra);
+    }
+    printf("\n");
+}
+
+int main()
+{
+    struct Equipo liga[MAX_EQUIPOS];
+    int opc;
+    int numEquipos;
+    do
+    {
+        printf("----- Liga de Futbol Virtual -----\n");
+        printf("1) Registrar equipos\n");
+        printf("2) Mostrar equipos\n");
+        printf("3) Registrar partido\n");
+        printf("4) Ver tabla de posiciones\n");
+        printf("5) Salir\n");
+        printf("\nElige una opcion: ");
+        scanf("%d", &opc);
+        printf("\n");
+        switch(opc)
+        {
+            case 1:
+                printf("Cuantos equipos quieres registrar (2-4): ");
+                scanf("%d", &numEquipos);
+                registrarEquipos(liga, &numEquipos);
+                break;
+            case 2:
+                printf("--- Equipos registrados ---\n");
+                mostrarEquipos(liga, numEquipos);
+                break;
+            case 3:
+                printf("--- Registro de partido ---\n");
+                registrarPartido(liga, numEquipos);
+                break;
+            case 4:
+                printf("--- Tabla de posiciones ---\n");
+                tablaPosiciones(liga, numEquipos);
+                break;
+        }
+    printf("\n");
+    } while(opc!=5);
+    return 0;
+}
